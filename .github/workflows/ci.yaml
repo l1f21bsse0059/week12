@@ -1,0 +1,24 @@
+name: ci-wf
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+jobs:
+  initiating-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        run: actions/checkout@v4
+      - name: install HTMLHint
+        run: npm install --save-dev htmlhint
+      - name: install Stylelint
+        run: npm install --save-dev stylelint
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"               
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"  
+      - name: List Contents pf Package.json
+        run: cat package.json
